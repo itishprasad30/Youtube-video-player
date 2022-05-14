@@ -49,13 +49,12 @@ video {
     border: none;
     color: inherit;
     padding: 0px;
-    height: 30px;
+    /* height: 30px; */
     width: 30px;
     font-size: 1.1rem;
     cursor: pointer;
     opacity: .85;
     transition: opacity 150ms ease-in-out ;
-
 }
 
 video-controls-container .controls button:hover {

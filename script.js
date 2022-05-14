@@ -1,7 +1,8 @@
 const playPauseBtn = document.querySelector(".play-pause-btn");
-const videoContainer = document.querySelector(".video-contianer");
+const videoContainer = document.querySelector(".video-container");
 const video = document.querySelector("video");
 
+console.log(videoContainer);
 playPauseBtn.addEventListener("click", togglePlay);
 
 function togglePlay() {
