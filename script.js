@@ -3,7 +3,10 @@ const theaterBtn = document.querySelector(".theater-btn");
 const fullScreenBtn = document.querySelector(".full-screen-btn");
 const miniPlayerBtn = document.querySelector(".mini-play-btn");
 const muteBtn = document.querySelector(".mute-btn");
+const currentTime = document.querySelector(".current-time");
+const totalTime = document.querySelector(".total-time");
 const volumeSlider = document.querySelector(".volume-slider");
+const captionBtn = document.querySelector(".caption-btn");
 const videoContainer = document.querySelector(".video-container");
 const video = document.querySelector("video");
 
@@ -13,7 +16,7 @@ document.addEventListener("keydown", (e) => {
   if (tagName === "input") return;
 
   switch (e.key.toLowerCase()) {
-    case " ":
+    case "":
       if (tagName === "button") return;
     case "k":
       togglePlay();
@@ -29,18 +32,82 @@ document.addEventListener("keydown", (e) => {
     case "t":
       toggleTheaterMode();
       break;
+    case "m":
+      toggleMute();
+      break;
+
+    case "arrowleft":
+    case "j":
+      skip(-5);
+      break;
+
+    case "arrowright":
+    case "l":
+      skip(5);
+      break;
+
+    case "c":
+      toggleCaption();
+      break;
   }
 });
+
+// caption
+const caption = video.textTracks[0];
+
+caption.mode = "hidden";
+
+captionBtn.addEventListener("click", toggleCaption);
+
+function toggleCaption() {
+  const isHidden = caption.mode === "hidden";
+
+  caption.mode = isHidden ? "showing" : "hidden";
+
+  videoContainer.classList.toggle("captions", isHidden);
+}
+// Duration
+
+video.addEventListener("timeupdate", () => {
+  currentTime.textContent = formartDuration(video.currentTime);
+});
+
+const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
+  minimumIntegerDigits: 2,
+});
+
+video.addEventListener("loadeddata", () => {
+  totalTime.textContent = formartDuration(video.duration);
+});
+
+function formartDuration(time) {
+  const seconds = Math.floor(time % 60);
+  const minutes = Math.floor(time / 60) % 60;
+
+  const hours = Math.floor(time / 3600);
+
+  if (hours === 0) {
+    return `${minutes}:${leadingZeroFormatter.format(seconds)}`;
+  } else {
+    return `${hours}:${leadingZeroFormatter.format(
+      minutes
+    )}:${leadingZeroFormatter.format(seconds)}`;
+  }
+}
+
+function skip(duration) {
+  video.currentTime += duration;
+}
 //volume controls
 
-muteBtn.addEventListener("click", toggleVolume);
+muteBtn.addEventListener("click", toggleMute);
 volumeSlider.addEventListener("input", (e) => {
   video.volume = e.target.value;
   video.muted = e.target.value === 0;
 });
 
-function toggleVolume() {
-  video.muted = !video.muted;
+function toggleMute() {
+  video.muted != video.muted;
 }
 
 video.addEventListener("volumechange", () => {

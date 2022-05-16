@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="video-container paused " data-volume-level="low">
+    <div class="video-container paused  captions" data-volume-level="high">
         <div class="video-controls-container">
             <div class="timeline-container"></div>
             <div class="controls">
@@ -44,6 +44,20 @@
                     <input class="volume-slider" type="range" min="0" max="1" step="any" value="0.5">
                 </div>
 
+                <div class="duration-container">
+                    <div class="current-time">0:00</div>
+                    /
+                    <div class="total-time">8:45</div>
+
+                </div>
+
+                <button class="caption-btn">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M18,11H16.5V10.5H14.5V13.5H16.5V13H18V14A1,1 0 0,1 17,15H14A1,1 0 0,1 13,14V10A1,1 0 0,1 14,9H17A1,1 0 0,1 18,10M11,11H9.5V10.5H7.5V13.5H9.5V13H11V14A1,1 0 0,1 10,15H7A1,1 0 0,1 6,14V10A1,1 0 0,1 7,9H10A1,1 0 0,1 11,10M19,4H5C3.89,4 3,4.89 3,6V18A2,2 0 0,0 5,20H19A2,2 0 0,0 21,18V6C21,4.89 20.1,4 19,4Z" />
+                    </svg>
+                </button>
+
                 <button class="mini-play-btn"><svg viewBox="0 0 24 24">
                         <path fill="currentColor"
                             d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zm-10-7h9v6h-9z" />
@@ -67,7 +81,10 @@
 
             </div>
         </div>
-        <video src="/assets/video.mp4" autoplay></video>
+        <video src="/assets/video.mp4">
+            <track kind="captions" srclang="en" src="assets/subtitle.vtt">
+
+        </video>
     </div>
 </body>
 

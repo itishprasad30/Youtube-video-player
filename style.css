@@ -148,3 +148,14 @@ video-controls-container .controls button:hover {
     width: 100px;
     transform: scaleX(1);
 }
+
+.duration-container {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    flex-grow: 1;
+}
+
+.video-container.captions .caption-btn {
+    border-bottom: 3px solid red;
+}
