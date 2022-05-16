@@ -7,7 +7,11 @@ const currentTime = document.querySelector(".current-time");
 const totalTime = document.querySelector(".total-time");
 const volumeSlider = document.querySelector(".volume-slider");
 const captionBtn = document.querySelector(".caption-btn");
+const speedBtn = document.querySelector(".speed-btn");
+const previewImg = document.querySelector(".preview-img");
+const thumbnailImg = document.querySelector(".thumbnail-img");
 const videoContainer = document.querySelector(".video-container");
+const timelineContainer = document.querySelector(".timeline-container");
 const video = document.querySelector("video");
 
 document.addEventListener("keydown", (e) => {
@@ -52,6 +56,30 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+// Timeline
+
+timelineContainer.addEventListener("mousemove", handleTimelineUpdate);
+function handleTimelineUpdate(e) {
+  const rect = timelineContainer.getBoundingClientRect();
+  const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+
+  const previewImgNumber = Math.max(
+    1,
+    Math.floor(percent * videoDuration) / 10
+  );
+}
+
+// playback speed
+
+speedBtn.addEventListener("click", changePlaybackSpeed);
+
+function changePlaybackSpeed() {
+  let newPlayBackRate = video.playbackRate + 0.25;
+  if (newPlayBackRate > 2) newPlayBackRate = 0.25;
+  video.playbackRate = newPlayBackRate;
+
+  speedBtn.textContent = `${newPlayBackRate}x`;
+}
 // caption
 const caption = video.textTracks[0];
 
