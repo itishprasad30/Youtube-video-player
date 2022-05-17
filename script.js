@@ -131,6 +131,8 @@ function toggleCaption() {
 
 video.addEventListener("timeupdate", () => {
   currentTime.textContent = formartDuration(video.currentTime);
+  const percent = video.currentTime / video.duration;
+  timelineContainer.style.setProperty("--progress-position", percent);
 });
 
 const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
